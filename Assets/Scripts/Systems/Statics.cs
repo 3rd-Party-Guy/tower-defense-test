@@ -7,13 +7,15 @@ namespace TDTest
     {
         public static event Action OnInitializationFinish;
 
+        public static GridSystem Grid { get; private set; } = new();
+
         static List<ISystem> systems;
 
         public static void Initialize()
         {
             systems = new()
             {
-
+                Grid,
             };
 
             systems.ForEach(e => e.Initialize());
