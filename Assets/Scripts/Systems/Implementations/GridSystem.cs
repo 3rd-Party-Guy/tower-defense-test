@@ -4,7 +4,7 @@ namespace TDTest
     {
         public void Initialize()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void Tick(float deltaTime, float unscaledDeltaTime) { }
