@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace TDGame
 {
+    [DefaultExecutionOrder(-10)]
+    public class GameManager : MonoBehaviour
+    {
 
+    }
 }
