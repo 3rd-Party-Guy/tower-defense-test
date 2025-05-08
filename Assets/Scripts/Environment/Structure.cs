@@ -12,7 +12,7 @@ namespace TDTest.Grid
 
         void Start()
         {
-            Statics.Grid.RegisterStructure(gridHolder);
+            Statics.Grid.RegisterStructure(this);
         }
     }
 }
