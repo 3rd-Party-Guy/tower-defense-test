@@ -3,3 +3,4 @@
 	-> reference to Structure almost creates a loop
 	-> reference to Grid in Structure feels better, makes GridSystem somewhat obsolete
 	-> GridSystem dictionary lookup is O(1), and is well separated for now ¯\(ツ)/¯
+2. Left to do: Automatically calculate cell size
