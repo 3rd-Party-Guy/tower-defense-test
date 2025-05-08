@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TDTest.Grid
+namespace TDTest.Structural
 {
     /// <summary>
     /// Type: MonoBehvaiour
@@ -9,6 +9,7 @@ namespace TDTest.Grid
     public class Structure : MonoBehaviour
     {
         [field: SerializeField] public Transform gridHolder { get; private set; }
+        [field: SerializeField] public GridDescription GridDescription { get; private set; }
 
         void Start()
         {

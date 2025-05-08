@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TDTest.Grid
+namespace TDTest.Structural
 {
     public class GridSystem : ISystem
     {
@@ -29,7 +29,7 @@ namespace TDTest.Grid
 
         void CreateGridForStructure(Structure structure)
         {
-
+            Debug.Assert(structure.GridDescription.IsValid(out var err), err);
         }
     }
 }

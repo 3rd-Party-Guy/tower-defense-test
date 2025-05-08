@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using TDTest.Grid;
+using TDTest.Structural;
 
 namespace TDTest
 {
