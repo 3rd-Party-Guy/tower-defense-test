@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TDTest.Structural
@@ -14,6 +15,17 @@ namespace TDTest.Structural
             cells = new Cell[description.Width, description.Height];
 
             CalculateWorldOrigin(structure);
+        }
+
+        public List<Vector3> AllWorldPos()
+        {
+            var positions = new List<Vector3>();
+
+            for (int x = 0; x < description.Width; x++)
+            for (int y = 0; y < description.Height; y++)
+                positions.Add(ToWorldPos(x, y));
+
+            return positions;
         }
 
         public Vector3 ToWorldPos(int x, int y)

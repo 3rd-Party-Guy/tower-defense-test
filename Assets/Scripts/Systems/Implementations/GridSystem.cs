@@ -5,6 +5,8 @@ namespace TDTest.Structural
 {
     public class GridSystem : ISystem
     {
+        public IDictionary<Structure, Grid> StructureGridLookup => structureGridLookup;
+
         Dictionary<Structure, Grid> structureGridLookup;
 
         public void Initialize()
