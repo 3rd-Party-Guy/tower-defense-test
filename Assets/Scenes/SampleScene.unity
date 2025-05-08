@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a8a9a62807a1340b8798f3458ee360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <gridHolder>k__BackingField: {fileID: 236049230}
+  <GridHolder>k__BackingField: {fileID: 236049230}
   <GridDescription>k__BackingField:
     height: 5
     width: 5
