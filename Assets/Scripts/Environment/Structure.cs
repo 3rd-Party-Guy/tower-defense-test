@@ -20,10 +20,10 @@ namespace TDTest.Structural
         {
             if (!Application.isPlaying) return;
 
-            Gizmos.color = Color.blue;
+            Gizmos.color = Color.green;
 
             var positions = Statics.Grid.StructureGridLookup[this].AllWorldPos();
-            positions.ForEach(e => Gizmos.DrawSphere(e, 1f));
+            positions.ForEach(e => Gizmos.DrawSphere(e, .25f));
         }
     }
 }
