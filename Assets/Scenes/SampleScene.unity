@@ -245,7 +245,8 @@ MonoBehaviour:
   <GridDescription>k__BackingField:
     height: 5
     width: 5
-    cellSize: 4
+    automaticCellSize: 1
+    cellSize: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
