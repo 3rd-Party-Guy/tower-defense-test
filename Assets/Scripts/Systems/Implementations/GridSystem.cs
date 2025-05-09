@@ -24,6 +24,7 @@ namespace TDTest.Structural
         public void RegisterStructure(Structure newStructure)
         {
             Debug.Assert(!structureGridLookup.ContainsKey(newStructure), "GridSystem: Tried to register structure twice.");
+            ConfigureGridDescription(newStructure);
             CreateGridForStructure(newStructure);
         }
 
@@ -31,6 +32,12 @@ namespace TDTest.Structural
         {
             Debug.Assert(structureGridLookup[structure] != null, "GridSystem: Tried to calculate world position for unregistered grid.");
             return structureGridLookup[structure].ToWorldPos(x, y);
+        }
+
+        void ConfigureGridDescription(Structure structure)
+        {
+            if (structure.GridDescription.AutomaticCellSize)
+                structure.GridDescription.CalculateCellSize(structure);
         }
 
         void CreateGridForStructure(Structure structure)

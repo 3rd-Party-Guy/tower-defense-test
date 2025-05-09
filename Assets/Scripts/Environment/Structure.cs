@@ -18,6 +18,8 @@ namespace TDTest.Structural
 
         void OnDrawGizmosSelected()
         {
+            if (!Application.isPlaying) return;
+
             Gizmos.color = Color.blue;
 
             var positions = Statics.Grid.StructureGridLookup[this].AllWorldPos();

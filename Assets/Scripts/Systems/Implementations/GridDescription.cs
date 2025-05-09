@@ -7,15 +7,31 @@ namespace TDTest.Structural
     /// Description: Information about a grid
     /// </summary>
     [System.Serializable]
-    public struct GridDescription
+    public class GridDescription
     {
         public int Height => height;
         public int Width => width;
+        public bool AutomaticCellSize => automaticCellSize;
         public float CellSize => cellSize;
 
         [SerializeField] int height;
         [SerializeField] int width;
+        [SerializeField] bool automaticCellSize;
         [SerializeField] float cellSize;
+
+        public void CalculateCellSize(Structure structure)
+        {
+            var scale = structure.GridHolder.localScale;
+
+            var planeWidth = 10f * scale.x;
+            var planeHeight = 10f * scale.z;
+
+            var cellSizeX = planeWidth / Width;
+            var cellSizeY = planeHeight / Height;
+            var final = Mathf.Min(cellSizeX, cellSizeY);
+
+            cellSize = final;
+        }
 
         public bool IsValid(out string errorMessage)
         {
