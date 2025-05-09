@@ -36,9 +36,9 @@ namespace TDTest.Structural
             var cellSize = description.CellSize;
 
             return new Vector3(
-                worldOrigin.x + cellSize * x,
+                worldOrigin.x + cellSize * x + cellSize * 0.5f,
                 worldOrigin.y,
-                worldOrigin.z + cellSize * y);
+                worldOrigin.z + cellSize * y + cellSize * 0.5f);
         }
 
         void CalculateWorldOrigin(Structure structure)
