@@ -20,10 +20,13 @@ namespace TDTest.Structural
         {
             if (!Application.isPlaying) return;
 
-            Gizmos.color = Color.green;
+            Statics.Grid.StructureGridLookup[this].ForEachCell(DebugDrawSphere);
+        }
 
-            var positions = Statics.Grid.StructureGridLookup[this].AllWorldPos();
-            positions.ForEach(e => Gizmos.DrawSphere(e, .25f));
+        void DebugDrawSphere(int x, int y, Cell cell)
+        {
+            Gizmos.color = (cell.IsOccupied) ? Color.red : Color.green;
+            Gizmos.DrawSphere(cell.WorldPosition, .25f);
         }
     }
 }

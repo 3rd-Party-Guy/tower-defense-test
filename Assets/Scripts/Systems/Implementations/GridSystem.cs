@@ -31,7 +31,7 @@ namespace TDTest.Structural
         public Vector3 GridToWorldPos(Structure structure, int x, int y)
         {
             Debug.Assert(structureGridLookup[structure] != null, "GridSystem: Tried to calculate world position for unregistered grid.");
-            return structureGridLookup[structure].ToWorldPos(x, y);
+            return structureGridLookup[structure].CalculateCellWorldPosition(x, y);
         }
 
         void ConfigureGridDescription(Structure structure)
