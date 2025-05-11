@@ -13,14 +13,14 @@ namespace TDTest.Structural
 
         void Start()
         {
-            Statics.Grid.RegisterStructure(this);
+            Statics.Grids.RegisterStructure(this);
         }
 
         void OnDrawGizmosSelected()
         {
             if (!Application.isPlaying) return;
 
-            Statics.Grid.StructureGridLookup[this].ForEachCell(DebugDrawSphere);
+            Statics.Grids.StructureGridLookup[this].ForEachCell(DebugDrawSphere);
         }
 
         void DebugDrawSphere(int x, int y, Cell cell)

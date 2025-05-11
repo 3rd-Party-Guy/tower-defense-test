@@ -8,7 +8,7 @@ namespace TDTest
     {
         public static event Action OnInitializationFinish;
 
-        public static GridSystem Grid { get; private set; } = new();
+        public static GridSystem Grids { get; private set; } = new();
 
         static List<ISystem> systems;
 
@@ -16,7 +16,7 @@ namespace TDTest
         {
             systems = new()
             {
-                Grid,
+                Grids,
             };
 
             systems.ForEach(e => e.Initialize());
