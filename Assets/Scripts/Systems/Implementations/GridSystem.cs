@@ -5,33 +5,27 @@ namespace TDTest.Structural
 {
     public class GridSystem : ISystem
     {
-        public IDictionary<Structure, Grid> StructureGridLookup => structureGridLookup;
+        public IDictionary<Transform, Structure> TransformStructureLookup => transformStructureLookup;
 
-        Dictionary<Structure, Grid> structureGridLookup;
+        Dictionary<Transform, Structure> transformStructureLookup;
 
         public void Initialize()
         {
-            structureGridLookup = new();
+            transformStructureLookup = new();
         }
 
         public void Tick(float deltaTime, float unscaledDeltaTime) { }
 
         public void Deinitialize()
         {
-            structureGridLookup = null;
+            transformStructureLookup = null;
         }
 
-        public void RegisterStructure(Structure newStructure)
+        public Grid RegisterStructure(Structure newStructure)
         {
-            Debug.Assert(!structureGridLookup.ContainsKey(newStructure), "GridSystem: Tried to register structure twice.");
+            Debug.Assert(!transformStructureLookup.ContainsKey(newStructure.GridHolder), "GridSystem: Tried to register structure twice.");
             ConfigureGridDescription(newStructure);
-            CreateGridForStructure(newStructure);
-        }
-
-        public Vector3 GridToWorldPos(Structure structure, int x, int y)
-        {
-            Debug.Assert(structureGridLookup[structure] != null, "GridSystem: Tried to calculate world position for unregistered grid.");
-            return structureGridLookup[structure].Cells[x, y].WorldPosition;
+            return CreateGridForStructure(newStructure);
         }
 
         void ConfigureGridDescription(Structure structure)
@@ -40,10 +34,11 @@ namespace TDTest.Structural
                 structure.GridDescription.CalculateCellSize(structure);
         }
 
-        void CreateGridForStructure(Structure structure)
+        Grid CreateGridForStructure(Structure structure)
         {
             Debug.Assert(structure.GridDescription.IsValid(out var err), err);
-            structureGridLookup.Add(structure, new Grid(structure));
+            transformStructureLookup.Add(structure.GridHolder, structure);
+            return new Grid(structure);
         }
     }
 }

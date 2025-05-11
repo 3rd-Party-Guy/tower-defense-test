@@ -12,5 +12,10 @@ namespace TDTest.Structural
             WorldPosition = worldPosition;
             IsOccupied = isOccupied;
         }
+
+        public void DEBUGOccupyChange()
+        {
+            IsOccupied = !IsOccupied;
+        }
     }
 }

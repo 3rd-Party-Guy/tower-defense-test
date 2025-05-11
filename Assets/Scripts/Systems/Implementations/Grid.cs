@@ -7,6 +7,7 @@ namespace TDTest.Structural
     public class Grid
     {
         public Cell[,] Cells { get; private set; }
+
         GridDescription description;
         Vector3 worldOrigin;
 
@@ -31,8 +32,9 @@ namespace TDTest.Structural
 
         public Vector2Int WorldToGrid(Vector3 worldPos)
         {
-            var x = Mathf.FloorToInt(worldPos.x / description.CellSize);
-            var y = Mathf.FloorToInt(worldPos.y / description.CellSize);
+            var gridPos = new Vector2(worldPos.x - worldOrigin.x, worldPos.z - worldOrigin.z);
+            var x = Mathf.FloorToInt(gridPos.x / description.CellSize);
+            var y = Mathf.FloorToInt(gridPos.y / description.CellSize);
 
             return new Vector2Int(x, y);
         }

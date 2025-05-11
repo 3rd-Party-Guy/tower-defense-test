@@ -8,19 +8,20 @@ namespace TDTest.Structural
     /// </summary>
     public class Structure : MonoBehaviour
     {
+        public Grid Grid { get; private set; }
+
         [field: SerializeField] public Transform GridHolder { get; private set; }
         [field: SerializeField] public GridDescription GridDescription { get; private set; }
 
         void Start()
         {
-            Statics.Grids.RegisterStructure(this);
+            Grid = Statics.Grids.RegisterStructure(this);
         }
 
         void OnDrawGizmosSelected()
         {
             if (!Application.isPlaying) return;
-
-            Statics.Grids.StructureGridLookup[this].ForEachCell(DebugDrawSphere);
+            Grid.ForEachCell(DebugDrawSphere);
         }
 
         void DebugDrawSphere(int x, int y, Cell cell)
