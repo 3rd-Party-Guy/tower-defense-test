@@ -8,7 +8,10 @@ namespace TDTest.Input
 {
     public class InputHandleSystem : ISystem
     {
-        public Action<TouchState> OnTap;
+        public Action<TouchState> OnTouchAny;
+        public Action<TouchState> OnTouchBegan;
+        public Action<TouchState> OnTouchMoved;
+        public Action<TouchState> OnTouchEnded;
 
         InputAction tapAction;
 
@@ -21,7 +24,7 @@ namespace TDTest.Input
             }
 
             tapAction = InputSystem.actions.FindActionMap("Player").FindAction("Tap");
-            tapAction.performed += OnTapped;
+            tapAction.performed += OnTouched;
             tapAction.Enable();
         }
 
@@ -34,8 +37,30 @@ namespace TDTest.Input
                 TouchSimulation.Disable();
             }
 
-            tapAction.performed -= OnTapped;
+            tapAction.performed -= OnTouched;
             tapAction.Disable();
+        }
+
+        void OnTouched(InputAction.CallbackContext context)
+        {
+            var touchState = context.ReadValue<TouchState>();
+
+            OnTouchAny?.Invoke(touchState);
+
+            switch (touchState.phase)
+            {
+                case UnityEngine.InputSystem.TouchPhase.Began:
+                    OnTouchBegan?.Invoke(touchState);
+                    break;
+                case UnityEngine.InputSystem.TouchPhase.Moved:
+                    OnTouchMoved?.Invoke(touchState);
+                    break;
+                case UnityEngine.InputSystem.TouchPhase.Ended:
+                    OnTouchEnded?.Invoke(touchState);
+                    break;
+                default:
+                    break;
+            }
         }
 
         bool IsPlatformEditor()
@@ -45,10 +70,5 @@ namespace TDTest.Input
                 || Application.platform == RuntimePlatform.LinuxEditor;
         }
 
-        void OnTapped(InputAction.CallbackContext context)
-        {
-            var touchState = context.ReadValue<TouchState>();
-            OnTap?.Invoke(touchState);
-        }
     }
 }

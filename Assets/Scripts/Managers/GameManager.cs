@@ -11,8 +11,7 @@ namespace TDTest
         void Start()
         {
             Statics.Initialize();
-
-            Statics.Inputs.OnTap += CheckStructureTap;
+            Statics.Inputs.OnTouchBegan += CheckStructureTap;
         }
 
         private void Update()
@@ -22,13 +21,15 @@ namespace TDTest
 
         void OnDestroy()
         {
-            Statics.Inputs.OnTap -= CheckStructureTap;
-
+            Statics.Inputs.OnTouchBegan -= CheckStructureTap;
             Statics.Deinitialize();
         }
 
         void CheckStructureTap(TouchState state)
         {
+            if (state.phase != UnityEngine.InputSystem.TouchPhase.Began)
+                return;
+
             var ray = Camera.main.ScreenPointToRay(state.position);
             Debug.DrawRay(ray.origin, ray.direction, Color.red, 10f, false);
             
