@@ -1,11 +1,8 @@
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 namespace TDTest.Structural
 {
-    /// <summary>
-    /// Type: MonoBehvaiour
-    /// Description: Defines a surface eligible for a grid
-    /// </summary>
     public class Structure : MonoBehaviour
     {
         public Grid Grid { get; private set; }

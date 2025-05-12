@@ -1,4 +1,3 @@
-using TDTest.Structural;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -11,24 +10,9 @@ namespace TDTest
     {
         InputAction tapAction;
 
-        void Awake()
-        {
-            // simulate touchscreen
-            if (Application.isPlaying && Application.platform == RuntimePlatform.WindowsEditor)
-            {
-                Debug.Log("Simulating Touchscreen...");
-                TouchSimulation.Enable();
-            }
-        }
-
         void Start()
         {
-
             Statics.Initialize();
-
-            tapAction = InputSystem.actions.FindActionMap("Player").FindAction("Tap");
-            tapAction.performed += DEBUGHandleTouch;
-            tapAction.Enable();
         }
 
         private void Update()
@@ -39,11 +23,6 @@ namespace TDTest
         void OnDestroy()
         {
             Statics.Deinitialize();
-
-            if (!Application.isPlaying || Application.platform == RuntimePlatform.WindowsEditor)
-            {
-                TouchSimulation.Disable();
-            }
 
             tapAction.performed -= DEBUGHandleTouch;
             tapAction.Disable();

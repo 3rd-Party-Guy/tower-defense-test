@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TDTest.Input;
 using TDTest.Structural;
 
 namespace TDTest
@@ -9,6 +10,7 @@ namespace TDTest
         public static event Action OnInitializationFinish;
 
         public static GridSystem Grids { get; private set; } = new();
+        public static InputHandleSystem Inputs { get; private set; } = new();
 
         static List<ISystem> systems;
 
@@ -16,6 +18,7 @@ namespace TDTest
         {
             systems = new()
             {
+                Inputs,
                 Grids,
             };
 
