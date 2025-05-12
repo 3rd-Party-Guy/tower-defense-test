@@ -1,19 +1,22 @@
 using UnityEngine;
 
-namespace TDTest
+namespace TDTest.Combat
 {
     public class Enemy : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
-        }
+        public Health Health { get; private set; }
+        public EnemyDescription Description { get; private set; }
+        bool isInitialized = false;
 
-        // Update is called once per frame
-        void Update()
+        public void Initialize(EnemyDescription description)
         {
-        
+            Debug.Assert(!isInitialized, "Enemy: Tried to initialize twice");
+            isInitialized = true;
+
+            Description = description;
+            Health = new(description.StartHealth);
+
+            Instantiate(description.Skeleton, transform);
         }
     }
 }
