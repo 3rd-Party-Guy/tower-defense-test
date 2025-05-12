@@ -24,7 +24,7 @@ namespace TDTest.Structural
 
         void DebugDrawSphere(int x, int y, Cell cell)
         {
-            Gizmos.color = (cell.FSM.StateMachine.State is CellFSM.State.EnemyPath) ? Color.red : Color.green;
+            Gizmos.color = (cell.FSM.StateMachine.State is CellFSM.State.Free) ? Color.green : Color.red;
             Gizmos.DrawSphere(cell.WorldPosition, .25f);
         }
     }

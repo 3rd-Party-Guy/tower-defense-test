@@ -47,8 +47,8 @@ namespace TDTest.Structural
         {
             bool IsPathInBounds(int x, int y)
             {
-                var xInBounds = (x >= 0 || x < grid.Cells.GetLength(0));
-                var yInBounds = (x >= 0 || x < grid.Cells.GetLength(1));
+                var xInBounds = (x >= 0 && x < grid.Cells.GetLength(0));
+                var yInBounds = (y >= 0 && y < grid.Cells.GetLength(1));
 
                 return xInBounds && yInBounds;
             }

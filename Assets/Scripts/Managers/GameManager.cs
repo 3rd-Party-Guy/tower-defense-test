@@ -8,11 +8,11 @@ namespace TDTest
     [DefaultExecutionOrder(-10)]
     public class GameManager : MonoBehaviour
     {
-        InputAction tapAction;
-
         void Start()
         {
             Statics.Initialize();
+
+            Statics.Inputs.OnTap += CheckStructureTap;
         }
 
         private void Update()
@@ -22,16 +22,9 @@ namespace TDTest
 
         void OnDestroy()
         {
+            Statics.Inputs.OnTap -= CheckStructureTap;
+
             Statics.Deinitialize();
-
-            tapAction.performed -= DEBUGHandleTouch;
-            tapAction.Disable();
-        }
-
-        void DEBUGHandleTouch(InputAction.CallbackContext ctx)
-        {
-            var touchState = ctx.ReadValue<TouchState>();
-            CheckStructureTap(touchState);
         }
 
         void CheckStructureTap(TouchState state)
@@ -45,7 +38,7 @@ namespace TDTest
                 var grid = structure.Grid;
                 var coords = grid.WorldToGrid(hit.point);
 
-                grid.Cells[coords.x, coords.y].DEBUGOccupyChange();
+                grid.Cells[coords.x, coords.y].FSM.StateMachine.Signal(Structural.CellFSM.Trigger.ToBuilding);
             }
         }
     }

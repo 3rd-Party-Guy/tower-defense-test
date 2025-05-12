@@ -1,4 +1,3 @@
-using TDTest.Structure;
 using UnityEngine;
 
 namespace TDTest.Structural

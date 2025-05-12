@@ -49,7 +49,7 @@ namespace TDTest.Structural
         void InitializeCellsArray()
         {
             Cells = new Cell[description.Width, description.Height];
-            ForEachCell((x, y, _) => Cells[x, y] = new(CalculateCellWorldPosition(x, y), false));
+            ForEachCell((x, y, _) => Cells[x, y] = new(CalculateCellWorldPosition(x, y)));
         }
 
         Vector3 CalculateCellWorldPosition(int x, int y)
