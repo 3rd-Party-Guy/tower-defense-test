@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 
 namespace TDTest.Structural
 {
@@ -9,6 +9,7 @@ namespace TDTest.Structural
 
         [field: SerializeField] public Transform GridHolder { get; private set; }
         [field: SerializeField] public GridDescription GridDescription { get; private set; }
+        [field: SerializeField] public List<Vector2Int> EnemyPath { get; private set; }
 
         void Start()
         {
@@ -23,7 +24,7 @@ namespace TDTest.Structural
 
         void DebugDrawSphere(int x, int y, Cell cell)
         {
-            Gizmos.color = (cell.IsOccupied) ? Color.red : Color.green;
+            Gizmos.color = (cell.FSM.StateMachine.State is CellFSM.State.EnemyPath) ? Color.red : Color.green;
             Gizmos.DrawSphere(cell.WorldPosition, .25f);
         }
     }
