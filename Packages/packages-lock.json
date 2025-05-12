@@ -14,7 +14,7 @@
       "dependencies": {
         "com.3rd-party-guy.unihelper": "https://github.com/3rd-Party-Guy/UniHelper.git"
       },
-      "hash": "871a3de219ada4324522ce877fd57bac5c8eb00f"
+      "hash": "d4b9689bc629778a3544ec824aa1747349233660"
     },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
