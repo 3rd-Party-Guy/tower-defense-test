@@ -13,6 +13,6 @@ namespace TDTest.Combat
     [System.Serializable]
     public struct EnemyWaveDescription
     {
-        public List<EnemySpawnEntry> EnemyWaves;
+        public List<EnemySpawnEntry> EnemySpawns;
     }
 }

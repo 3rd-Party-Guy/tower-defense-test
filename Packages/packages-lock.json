@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "14adc07e447931da1777c8f45eaee453e32f5134"
+      "hash": "d50dd6dad56c436ea3efceafa5e5cad941e92de5"
     },
     "com.3rd-party-guy.unistate": {
       "version": "https://github.com/3rd-Party-Guy/UniState.git",

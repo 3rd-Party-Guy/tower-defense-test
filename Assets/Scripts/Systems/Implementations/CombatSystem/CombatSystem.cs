@@ -13,6 +13,7 @@ namespace TDTest.Combat
         Dictionary<int, List<EnemySpawnEvent>> tickSpawnEventLookup;
         Enemy enemyPrefab;
 
+        int waveIndex;
         int tickIndex;
 
         public void Initialize()
@@ -27,6 +28,7 @@ namespace TDTest.Combat
 
             registeredStructures = new();
             tickSpawnEventLookup = new();
+            waveIndex = 0;
             tickIndex = 0;
 
             Statics.Flow.FSM.StateMachine.Configure(GameFlow.FlowFSM.State.Fighting)
@@ -61,15 +63,18 @@ namespace TDTest.Combat
 
         void StartWave()
         {
+            CreateSpawnEventsForWave();
+            tickTimer.Start(1f);
         }
 
         void StopWave()
         {
-
+            tickTimer.Pause();
         }
 
         void OnTickTimerCompleted()
         {
+            Debug.Log($"Handling tick {tickIndex}");
             SpawnForTick();
             tickIndex++;
         }
@@ -90,6 +95,24 @@ namespace TDTest.Combat
             var startPosCoords = enemySpawn.Structure.EnemyPath[0];
             var startCell = enemySpawn.Structure.Grid.Cells[startPosCoords.x, startPosCoords.y];
             enemy.transform.position = startCell.WorldPosition;
+        }
+        
+        void CreateSpawnEventsForWave()
+        {
+            tickSpawnEventLookup = new();
+            registeredStructures.ForEach(structure =>
+            {
+                if (structure.EnemyWaveDescriptions.TryGetValueAt(waveIndex, out var waveDescription))
+                {
+                    waveDescription.EnemySpawns.ForEach(spawn =>
+                    {
+                        if (!tickSpawnEventLookup.ContainsKey(spawn.TickToSpawnOn))
+                            tickSpawnEventLookup[spawn.TickToSpawnOn] = new();
+
+                        tickSpawnEventLookup[spawn.TickToSpawnOn].Add(new(spawn.EnemyToSpawn, structure));
+                    });
+                }
+            });
         }
     }
 }

@@ -8,6 +8,8 @@ namespace TDTest
     public class GameManager : MonoBehaviour
     {
         [SerializeField] Enemy levelEnemyPrefab;
+        float delay = 0.5f;
+        bool lockBool = false;
 
         void Start()
         {
@@ -17,9 +19,16 @@ namespace TDTest
             Statics.Inputs.OnTouchBegan += CheckStructureTap;
         }
 
-        private void Update()
+        void Update()
         {
             Statics.Tick(UnityEngine.Time.deltaTime, UnityEngine.Time.unscaledTime);
+
+            delay -= UnityEngine.Time.deltaTime;
+            if (delay <= 0f && !lockBool)
+            {
+                Statics.Flow.FSM.StateMachine.Signal(GameFlow.FlowFSM.Trigger.RoundStart);
+                lockBool = true;
+            }
         }
 
         void OnDestroy()
