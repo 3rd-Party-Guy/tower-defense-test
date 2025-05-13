@@ -151,7 +151,6 @@ MonoBehaviour:
   <EnemyWaveDescriptions>k__BackingField:
   - EnemySpawns:
     - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
-      <TickToSpawnOn>k__BackingField: 1
+      <TickToSpawnOn>k__BackingField: 0
     - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
-      <TickToSpawnOn>k__BackingField: 3
-  - EnemySpawns: []
+      <TickToSpawnOn>k__BackingField: 5
