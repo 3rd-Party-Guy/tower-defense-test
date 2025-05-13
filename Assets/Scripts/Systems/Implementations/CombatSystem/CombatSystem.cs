@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TDTest.Structural;
 using TDTest.Time;
-using UniHelper;
 using UnityEngine;
 
 namespace TDTest.Combat
@@ -10,11 +9,10 @@ namespace TDTest.Combat
     {
         Timer tickTimer;
         List<Structure> registeredStructures;
-        Dictionary<int, List<EnemySpawnEvent>> tickSpawnEventLookup;
-        Enemy enemyPrefab;
 
         int waveIndex;
-        int tickIndex;
+
+        EnemyTickSubsystem enemyTickSubsystem;
 
         public void Initialize()
         {
@@ -27,13 +25,13 @@ namespace TDTest.Combat
             tickTimer.OnComplete += OnTickTimerCompleted;
 
             registeredStructures = new();
-            tickSpawnEventLookup = new();
             waveIndex = 0;
-            tickIndex = 0;
 
             Statics.Flow.FSM.StateMachine.Configure(GameFlow.FlowFSM.State.Fighting)
                 .OnEntry(StartWave)
                 .OnExit(StopWave);
+
+            enemyTickSubsystem = new();
         }
 
         public void Tick(float deltaTime, float unscaledDeltaTime) { }
@@ -44,9 +42,9 @@ namespace TDTest.Combat
             registeredStructures = null;
         }
 
-        public void SetEnemyPrefab(Enemy newEnemyPrafab)
+        public void SetEnemyPrefab(Enemy newEnemyPrefab)
         {
-            enemyPrefab = newEnemyPrafab;
+            enemyTickSubsystem.SetEnemyPrefab(newEnemyPrefab);
         }
 
         public void RegisterStructure(Structure structure)
@@ -63,7 +61,7 @@ namespace TDTest.Combat
 
         void StartWave()
         {
-            CreateSpawnEventsForWave();
+            enemyTickSubsystem.CreateSpawnEventsForWave(registeredStructures, waveIndex);
             tickTimer.Start(1f);
         }
 
@@ -74,45 +72,7 @@ namespace TDTest.Combat
 
         void OnTickTimerCompleted()
         {
-            Debug.Log($"Handling tick {tickIndex}");
-            SpawnForTick();
-            tickIndex++;
-        }
-
-        void SpawnForTick()
-        {
-            if (tickSpawnEventLookup.TryGetValue(tickIndex, out var spawnEvents))
-            {
-                spawnEvents.ForEach(e => SpawnEnemy(e));
-            }
-        }
-
-        void SpawnEnemy(EnemySpawnEvent enemySpawn)
-        {
-            var enemy = Object.Instantiate(enemyPrefab);
-            enemy.Initialize(enemySpawn.Description, enemySpawn.Structure);
-
-            var startPosCoords = enemySpawn.Structure.EnemyPath[0];
-            var startCell = enemySpawn.Structure.Grid.Cells[startPosCoords.x, startPosCoords.y];
-            enemy.transform.position = startCell.WorldPosition;
-        }
-        
-        void CreateSpawnEventsForWave()
-        {
-            tickSpawnEventLookup = new();
-            registeredStructures.ForEach(structure =>
-            {
-                if (structure.EnemyWaveDescriptions.TryGetValueAt(waveIndex, out var waveDescription))
-                {
-                    waveDescription.EnemySpawns.ForEach(spawn =>
-                    {
-                        if (!tickSpawnEventLookup.ContainsKey(spawn.TickToSpawnOn))
-                            tickSpawnEventLookup[spawn.TickToSpawnOn] = new();
-
-                        tickSpawnEventLookup[spawn.TickToSpawnOn].Add(new(spawn.EnemyToSpawn, structure));
-                    });
-                }
-            });
+            enemyTickSubsystem.Tick(0f, 0f);
         }
     }
 }
