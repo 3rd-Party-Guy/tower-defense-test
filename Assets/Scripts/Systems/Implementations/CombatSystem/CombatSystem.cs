@@ -8,13 +8,14 @@ namespace TDTest.Combat
 {
     public class CombatSystem : ISystem
     {
+        public Health PlayerHealth { get; private set; }
+
         EnemyTickSubsystem enemyTickSubsystem;
         
         List<Structure> registeredStructures;
         int waveIndex;
 
         Timer tickTimer;
-        Health playerHealth;
 
         public void Initialize()
         {
@@ -37,7 +38,7 @@ namespace TDTest.Combat
             enemyTickSubsystem.Initialize();
             enemyTickSubsystem.OnEnemyPathFinish += OnEnemyPathFinished;
 
-            playerHealth = new(10);
+            PlayerHealth = new(10);
         }
 
         public void Tick(float deltaTime, float unscaledDeltaTime) { }
@@ -85,9 +86,8 @@ namespace TDTest.Combat
 
         void OnEnemyPathFinished(Enemy enemy)
         {
-            playerHealth.Damage(enemy.Description.Damage);
+            PlayerHealth.Damage(enemy.Description.Damage);
             enemyTickSubsystem.PushDestroyEnemy(new(enemy, false));
-            Debug.Log($"Player Health: {playerHealth.HP}");
         }
     }
 }
