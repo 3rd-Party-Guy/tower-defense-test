@@ -95,13 +95,12 @@ namespace TDTest.Combat
         {
             registeredEnemies.ForEach(enemy =>
             {
-                if (enemy.Structure.EnemyPath.TryGetValueAt(tickIndex, out var posCoords))
+                enemy.PathIndex++;
+
+                if (enemy.Structure.EnemyPath.TryGetValueAt(enemy.PathIndex, out var posCoords))
                     enemy.SetPosition(posCoords);
                 else
                     OnEnemyPathFinish?.Invoke(enemy);
-
-                Debug.Log($"Moving {enemy.name} with index {enemy.PathIndex}");
-                enemy.PathIndex++;
             });
         }
     }
