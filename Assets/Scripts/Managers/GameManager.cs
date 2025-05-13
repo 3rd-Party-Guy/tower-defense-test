@@ -1,6 +1,5 @@
+using TDTest.Combat;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.InputSystem.LowLevel;
 
 namespace TDTest
@@ -8,9 +7,13 @@ namespace TDTest
     [DefaultExecutionOrder(-10)]
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] Enemy levelEnemyPrefab;
+
         void Start()
         {
             Statics.Initialize();
+            Statics.Combat.SetEnemyPrefab(levelEnemyPrefab);
+
             Statics.Inputs.OnTouchBegan += CheckStructureTap;
         }
 

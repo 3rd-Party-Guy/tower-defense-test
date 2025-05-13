@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using TDTest.Structural;
 using TDTest.Time;
+using UniHelper;
 using UnityEngine;
 
 namespace TDTest.Combat
@@ -10,7 +10,10 @@ namespace TDTest.Combat
     {
         Timer tickTimer;
         List<Structure> registeredStructures;
-        int waveIndex;
+        Dictionary<int, List<EnemySpawnEvent>> tickSpawnEventLookup;
+        Enemy enemyPrefab;
+
+        int tickIndex;
 
         public void Initialize()
         {
@@ -23,7 +26,12 @@ namespace TDTest.Combat
             tickTimer.OnComplete += OnTickTimerCompleted;
 
             registeredStructures = new();
-            waveIndex = 0;
+            tickSpawnEventLookup = new();
+            tickIndex = 0;
+
+            Statics.Flow.FSM.StateMachine.Configure(GameFlow.FlowFSM.State.Fighting)
+                .OnEntry(StartWave)
+                .OnExit(StopWave);
         }
 
         public void Tick(float deltaTime, float unscaledDeltaTime) { }
@@ -34,9 +42,9 @@ namespace TDTest.Combat
             registeredStructures = null;
         }
 
-        public void StartWave()
+        public void SetEnemyPrefab(Enemy newEnemyPrafab)
         {
-
+            enemyPrefab = newEnemyPrafab;
         }
 
         public void RegisterStructure(Structure structure)
@@ -51,9 +59,37 @@ namespace TDTest.Combat
             registeredStructures.Remove(structure);
         }
 
+        void StartWave()
+        {
+        }
+
+        void StopWave()
+        {
+
+        }
+
         void OnTickTimerCompleted()
         {
-            throw new NotImplementedException();
+            SpawnForTick();
+            tickIndex++;
+        }
+
+        void SpawnForTick()
+        {
+            if (tickSpawnEventLookup.TryGetValue(tickIndex, out var spawnEvents))
+            {
+                spawnEvents.ForEach(e => SpawnEnemy(e));
+            }
+        }
+
+        void SpawnEnemy(EnemySpawnEvent enemySpawn)
+        {
+            var enemy = Object.Instantiate(enemyPrefab);
+            enemy.Initialize(enemySpawn.Description, enemySpawn.Structure);
+
+            var startPosCoords = enemySpawn.Structure.EnemyPath[0];
+            var startCell = enemySpawn.Structure.Grid.Cells[startPosCoords.x, startPosCoords.y];
+            enemy.transform.position = startCell.WorldPosition;
         }
     }
 }
