@@ -535,6 +535,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridGround
       objectReference: {fileID: 0}
+    - target: {fileID: 7548100353214255705, guid: ada18aa8fbb59e148bee7d2e08b0303b, type: 3}
+      propertyPath: <EnemyWaveDescriptions>k__BackingField.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548100353214255705, guid: ada18aa8fbb59e148bee7d2e08b0303b, type: 3}
+      propertyPath: <EnemyWaveDescriptions>k__BackingField.Array.data[0].EnemyWaves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

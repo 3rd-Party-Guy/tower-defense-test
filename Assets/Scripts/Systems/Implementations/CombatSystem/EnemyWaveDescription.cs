@@ -9,11 +9,10 @@ namespace TDTest.Combat
         [field: SerializeField] public EnemyDescription EnemyToSpawn { get; private set; }
         [field: SerializeField] public int AmountToSpawn { get; private set; }
         [field: SerializeField] public int TickRate { get; private set; }
-        [field: SerializeField] public int CooldownTicks { get; private set; }
     }
 
-    [CreateAssetMenu(fileName = "EnemyWaveDescription", menuName = "Scriptable Objects/EnemyWaveDescription")]
-    public class EnemyWaveDescription : ScriptableObject
+    [System.Serializable]
+    public struct EnemyWaveDescription
     {
         public List<EnemyWaveEntry> EnemyWaves;
     }

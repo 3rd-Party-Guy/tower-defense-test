@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TDTest.Combat;
 using UnityEngine;
 
 namespace TDTest.Structural
@@ -10,6 +11,7 @@ namespace TDTest.Structural
         [field: SerializeField] public Transform GridHolder { get; private set; }
         [field: SerializeField] public GridDescription GridDescription { get; private set; }
         [field: SerializeField] public List<Vector2Int> EnemyPath { get; private set; }
+        [field: SerializeField] public List<EnemyWaveDescription> EnemyWaveDescriptions { get; private set; }
 
         void Start()
         {
