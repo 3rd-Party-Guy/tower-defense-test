@@ -8,6 +8,7 @@ namespace TDTest.Combat
 {
     public class EnemyTickSubsystem : ISystem
     {
+        public Action OnEnemyWaveFinish;
         public Action<Enemy> OnEnemyPathFinish;
 
         Dictionary<int, List<EnemySpawnEvent>> tickSpawnEventLookup;
@@ -94,6 +95,12 @@ namespace TDTest.Combat
             {
                 // TODO: Give Player Coins
             }
+
+            Debug.Log($"Registered enemies: {registeredEnemies.Count}, TickSpawnEvents: {tickSpawnEventLookup.Count}");
+            if (registeredEnemies.Count == 0 && tickSpawnEventLookup.Count == 0)
+            {
+                OnEnemyWaveFinish?.Invoke();
+            }
         }
 
         void SpawnForTick()
@@ -101,6 +108,7 @@ namespace TDTest.Combat
             if (tickSpawnEventLookup.TryGetValue(tickIndex, out var spawnEvents))
             {
                 spawnEvents.ForEach(e => SpawnEnemy(e));
+                tickSpawnEventLookup.Remove(tickIndex);
             }
         }
 

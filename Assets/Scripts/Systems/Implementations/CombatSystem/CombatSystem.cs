@@ -37,6 +37,7 @@ namespace TDTest.Combat
             enemyTickSubsystem = new();
             enemyTickSubsystem.Initialize();
             enemyTickSubsystem.OnEnemyPathFinish += OnEnemyPathFinished;
+            enemyTickSubsystem.OnEnemyWaveFinish += OnEnemyWaveFinished;
 
             PlayerHealth = new(10);
         }
@@ -88,6 +89,12 @@ namespace TDTest.Combat
         {
             PlayerHealth.Damage(enemy.Description.Damage);
             enemyTickSubsystem.PushDestroyEnemy(new(enemy, false));
+        }
+
+        void OnEnemyWaveFinished()
+        {
+            waveIndex++;
+            Statics.Flow.FSM.StateMachine.Signal(GameFlow.FlowFSM.Trigger.RoundEnd);
         }
     }
 }
