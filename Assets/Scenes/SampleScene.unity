@@ -541,7 +541,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7548100353214255705, guid: ada18aa8fbb59e148bee7d2e08b0303b, type: 3}
       propertyPath: <EnemyWaveDescriptions>k__BackingField.Array.data[0].EnemyWaves.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548100353214255705, guid: ada18aa8fbb59e148bee7d2e08b0303b, type: 3}
+      propertyPath: <EnemyWaveDescriptions>k__BackingField.Array.data[0].EnemyWaves.Array.data[0].<TickRate>k__BackingField
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7548100353214255705, guid: ada18aa8fbb59e148bee7d2e08b0303b, type: 3}
+      propertyPath: <EnemyWaveDescriptions>k__BackingField.Array.data[0].EnemyWaves.Array.data[0].<EnemyToSpawn>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
+    - target: {fileID: 7548100353214255705, guid: ada18aa8fbb59e148bee7d2e08b0303b, type: 3}
+      propertyPath: <EnemyWaveDescriptions>k__BackingField.Array.data[0].EnemyWaves.Array.data[0].<AmountToSpawn>k__BackingField
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
