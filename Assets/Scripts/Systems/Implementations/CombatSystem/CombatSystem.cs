@@ -10,11 +10,12 @@ namespace TDTest.Combat
 
         public void Initialize()
         {
-            tickTimer = new();
+            tickTimer = new()
+            {
+                IsScaled = true,
+                IsRepeating = true
+            };
 
-            tickTimer.IsScaled = true;
-            tickTimer.IsRepeating = true;
-            
             tickTimer.OnComplete += OnTickTimerCompleted;
 
         }

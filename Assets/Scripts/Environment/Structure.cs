@@ -16,6 +16,7 @@ namespace TDTest.Structural
         void Start()
         {
             Grid = Statics.Grids.RegisterStructure(this);
+            Statics.Combat.RegisterStructure(this);
         }
 
         void OnDrawGizmosSelected()
