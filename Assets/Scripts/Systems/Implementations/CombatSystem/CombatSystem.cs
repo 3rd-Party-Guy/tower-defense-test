@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TDTest.Structural;
 using TDTest.Time;
@@ -7,12 +8,13 @@ namespace TDTest.Combat
 {
     public class CombatSystem : ISystem
     {
-        Timer tickTimer;
+        EnemyTickSubsystem enemyTickSubsystem;
+        
         List<Structure> registeredStructures;
-
         int waveIndex;
 
-        EnemyTickSubsystem enemyTickSubsystem;
+        Timer tickTimer;
+        Health playerHealth;
 
         public void Initialize()
         {
@@ -33,6 +35,9 @@ namespace TDTest.Combat
 
             enemyTickSubsystem = new();
             enemyTickSubsystem.Initialize();
+            enemyTickSubsystem.OnEnemyPathFinish += OnEnemyPathFinished;
+
+            playerHealth = new(10);
         }
 
         public void Tick(float deltaTime, float unscaledDeltaTime) { }
@@ -76,6 +81,13 @@ namespace TDTest.Combat
         void OnTickTimerCompleted()
         {
             enemyTickSubsystem.Tick(0f, 0f);
+        }
+
+        void OnEnemyPathFinished(Enemy enemy)
+        {
+            playerHealth.Damage(enemy.Description.Damage);
+            enemyTickSubsystem.PushDestroyEnemy(new(enemy, false));
+            Debug.Log($"Player Health: {playerHealth.HP}");
         }
     }
 }

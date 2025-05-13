@@ -12,6 +12,7 @@ namespace TDTest.Combat
 
         Dictionary<int, List<EnemySpawnEvent>> tickSpawnEventLookup;
         List<Enemy> registeredEnemies;
+        Stack<EnemyDestructionEntry> enemiesToDestroy;
 
         int tickIndex;
 
@@ -20,6 +21,7 @@ namespace TDTest.Combat
         public void Initialize()
         {
             registeredEnemies = new();
+            enemiesToDestroy = new();
             tickSpawnEventLookup = new();
             tickIndex = 0;
         }
@@ -28,6 +30,12 @@ namespace TDTest.Combat
         {
             MoveEnemies();
             SpawnForTick();
+            
+            while (enemiesToDestroy.TryPop(out var entry))
+            {
+                DestroyEnemy(entry);
+            }
+            
             tickIndex++;
         }
 
@@ -69,6 +77,23 @@ namespace TDTest.Combat
                     });
                 }
             });
+        }
+
+        public void PushDestroyEnemy(EnemyDestructionEntry entry)
+        {
+            Debug.Assert(registeredEnemies.Contains(entry.Enemy), "EnemyTickSubsytem: Tried to destroy unknown enemy");
+            enemiesToDestroy.Push(entry);
+        }
+
+        void DestroyEnemy(EnemyDestructionEntry entry)
+        {
+            registeredEnemies.Remove(entry.Enemy);
+            UnityEngine.Object.Destroy(entry.Enemy.gameObject);
+
+            if (entry.GiveGold)
+            {
+                // TODO: Give Player Coins
+            }
         }
 
         void SpawnForTick()
