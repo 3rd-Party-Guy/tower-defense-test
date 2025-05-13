@@ -32,6 +32,7 @@ namespace TDTest.Combat
                 .OnExit(StopWave);
 
             enemyTickSubsystem = new();
+            enemyTickSubsystem.Initialize();
         }
 
         public void Tick(float deltaTime, float unscaledDeltaTime) { }
@@ -40,6 +41,8 @@ namespace TDTest.Combat
         {
             tickTimer = null;
             registeredStructures = null;
+
+            enemyTickSubsystem.Deinitialize();
         }
 
         public void SetEnemyPrefab(Enemy newEnemyPrefab)

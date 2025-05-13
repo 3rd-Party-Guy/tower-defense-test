@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using TDTest.Structural;
 using UnityEngine;
 using UniHelper;
+using System;
 
 namespace TDTest.Combat
 {
     public class EnemyTickSubsystem : ISystem
     {
+        public Action<Enemy> OnEnemyPathFinish;
+
         Dictionary<int, List<EnemySpawnEvent>> tickSpawnEventLookup;
         List<Enemy> registeredEnemies;
 
@@ -23,6 +26,7 @@ namespace TDTest.Combat
 
         public void Tick(float _, float __)
         {
+            MoveEnemies();
             SpawnForTick();
             tickIndex++;
         }
@@ -77,12 +81,28 @@ namespace TDTest.Combat
 
         void SpawnEnemy(EnemySpawnEvent enemySpawn)
         {
-            var enemy = Object.Instantiate(enemyPrefab);
+            var enemy = UnityEngine.Object.Instantiate(enemyPrefab);
             enemy.Initialize(enemySpawn.Description, enemySpawn.Structure);
 
             var startPosCoords = enemySpawn.Structure.EnemyPath[0];
             var startCell = enemySpawn.Structure.Grid.Cells[startPosCoords.x, startPosCoords.y];
             enemy.transform.position = startCell.WorldPosition;
+
+            registeredEnemies.Add(enemy);
+        }
+
+        void MoveEnemies()
+        {
+            registeredEnemies.ForEach(enemy =>
+            {
+                if (enemy.Structure.EnemyPath.TryGetValueAt(tickIndex, out var posCoords))
+                    enemy.SetPosition(posCoords);
+                else
+                    OnEnemyPathFinish?.Invoke(enemy);
+
+                Debug.Log($"Moving {enemy.name} with index {enemy.PathIndex}");
+                enemy.PathIndex++;
+            });
         }
     }
 }
