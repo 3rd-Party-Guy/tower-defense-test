@@ -69,6 +69,11 @@ namespace TDTest.Combat
             registeredStructures.Remove(structure);
         }
 
+        public void KillEnemy(Enemy enemy)
+        {
+            enemyTickSubsystem.PushDestroyEnemy(new(enemy, true));
+        }
+
         void StartWave()
         {
             enemyTickSubsystem.CreateSpawnEventsForWave(registeredStructures, waveIndex);

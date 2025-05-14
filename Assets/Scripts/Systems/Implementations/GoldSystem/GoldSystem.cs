@@ -12,7 +12,7 @@ namespace TDTest.Gold
             private set
             {
                 gold = value;
-                OnGoldChange?.Invoke(gold);
+                OnGoldChange?.Invoke(value);
             }
         }
 
@@ -33,15 +33,12 @@ namespace TDTest.Gold
         public void AddGold(int amount)
         {
             Gold += amount;
-            OnGoldChange?.Invoke(Gold);
         }
 
         public void RemoveGold(int amount)
         {
             Debug.Assert(Gold >= amount, "GoldSystem: Tried to remove more gold than possible");
-
             Gold -= amount;
-            OnGoldChange?.Invoke(Gold);
         }
     }
 }

@@ -93,7 +93,7 @@ namespace TDTest.Combat
 
             if (entry.GiveGold)
             {
-                // TODO: Give Player Coins
+                Statics.Gold.AddGold(entry.Enemy.Description.GoldReward);
             }
 
             Debug.Log($"Registered enemies: {registeredEnemies.Count}, TickSpawnEvents: {tickSpawnEventLookup.Count}");

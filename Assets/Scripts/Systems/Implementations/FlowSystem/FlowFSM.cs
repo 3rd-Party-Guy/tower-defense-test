@@ -14,6 +14,7 @@ namespace TDTest.GameFlow
 
             StateMachine.Configure(State.Building)
                 .Permit(Trigger.RoundStart, State.Fighting);
+
             StateMachine.Configure(State.Fighting)
                 .Permit(Trigger.RoundEnd, State.Building)
                 .Permit(Trigger.Death, State.Lose)

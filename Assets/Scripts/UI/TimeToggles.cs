@@ -6,6 +6,7 @@ namespace TDTest.UI
 {
     public class TimeToggles : UIComponent
     {
+        [SerializeField] Button pause;
         [SerializeField] Button speedOne;
         [SerializeField] Button speedTwo;
         [SerializeField] Button speedThree;
@@ -20,6 +21,7 @@ namespace TDTest.UI
         {
             base.Initialize();
 
+            pause.onClick.AddListener(() => ChangeTimeScale(0f));
             speedOne.onClick.AddListener(() => ChangeTimeScale(speedOneScale));
             speedTwo.onClick.AddListener(() => ChangeTimeScale(speedTwoScale));
             speedThree.onClick.AddListener(() => ChangeTimeScale(speedThreeScale));
