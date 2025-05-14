@@ -77,6 +77,8 @@ namespace TDTest.Combat
         void StartWave()
         {
             enemyTickSubsystem.CreateSpawnEventsForWave(registeredStructures, waveIndex);
+            enemyTickSubsystem.RestartTick();
+
             tickTimer.Start(1f);
             
             Statics.Build.FSM.StateMachine.Signal(BuildFSM.Trigger.StartFight);

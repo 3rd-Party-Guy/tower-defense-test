@@ -21,7 +21,7 @@ namespace TDTest.UI
 
         void Cancel()
         {
-            Statics.Build.CancelMove();
+            Statics.Build.ExitMove();
         }
 
         void Move()

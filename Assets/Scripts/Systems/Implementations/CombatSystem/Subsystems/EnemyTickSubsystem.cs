@@ -80,6 +80,11 @@ namespace TDTest.Combat
             });
         }
 
+        public void RestartTick()
+        {
+            tickIndex = 0;
+        }
+
         public void PushDestroyEnemy(EnemyDestructionEntry entry)
         {
             Debug.Assert(registeredEnemies.Contains(entry.Enemy), "EnemyTickSubsytem: Tried to destroy unknown enemy");

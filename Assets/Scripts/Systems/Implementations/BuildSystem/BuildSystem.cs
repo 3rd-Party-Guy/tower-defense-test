@@ -41,6 +41,7 @@ namespace TDTest.Building
         public void Initialize()
         {
             FSM = new();
+            previewTurret = null;
         }
 
         public void Tick(float deltaTime, float unscaledDeltaTime)
@@ -59,7 +60,7 @@ namespace TDTest.Building
 
         public void SetPreviewTurretPrefab(PreviewTurret newPreviewTurret)
         {
-            previewTurret = newPreviewTurret;
+            previewTurretPrefab = newPreviewTurret;
         }
 
         public void SetTurretPrefab(Turret newTurretPrefab)
@@ -72,6 +73,8 @@ namespace TDTest.Building
             selectedDescription = description;
             Statics.Inputs.OnTouchBegan += PreviewTurret;
             FSM.StateMachine.Signal(BuildFSM.Trigger.StartMove);
+
+            previewTurret = null;
         }
 
         public void EnterBuild(TurretDescription description)
@@ -79,18 +82,24 @@ namespace TDTest.Building
             selectedDescription = description;
             Statics.Inputs.OnTouchBegan += PreviewTurret;
             FSM.StateMachine.Signal(BuildFSM.Trigger.StartBuild);
+
+            previewTurret = null;
         }
 
-        public void CancelMove()
+        public void ExitMove()
         {
             Statics.Inputs.OnTouchBegan -= PreviewTurret;
             FSM.StateMachine.Signal(BuildFSM.Trigger.CancelMove);
+
+            previewTurret = null;
         }
 
-        public void CancelBuild()
+        public void ExitBuild()
         {
             Statics.Inputs.OnTouchBegan -= PreviewTurret;
             FSM.StateMachine.Signal(BuildFSM.Trigger.CancelBuild);
+
+            previewTurret = null;
         }
 
         public bool CanPlaceOnGrid()
@@ -123,14 +132,23 @@ namespace TDTest.Building
 
             var turret = UnityEngine.Object.Instantiate(turretPrefab);
             turret.Initialize(selectedDescription);
+            turret.transform.position = selectedGrid.Cells[selectedCoords.x, selectedCoords.y].WorldPosition;
 
             if (takeMoney)
             {
                 Statics.Gold.RemoveGold(selectedDescription.Cost);
             }
+
+            if (previewTurret != null)
+                UnityEngine.Object.Destroy(previewTurret.gameObject);
+
+            if (FSM.StateMachine.State is BuildFSM.State.Build)
+                ExitBuild();
+            else if (FSM.StateMachine.State is BuildFSM.State.Move)
+                ExitMove();
         }
 
-        private void PreviewTurret(TouchState state)
+        void PreviewTurret(TouchState state)
         {
             var ray = Camera.main.ScreenPointToRay(state.position);
             Debug.DrawRay(ray.origin, ray.direction, Color.red, 10f, false);
@@ -147,6 +165,7 @@ namespace TDTest.Building
                 if (previewTurret == null)
                 {
                     previewTurret = UnityEngine.Object.Instantiate(previewTurretPrefab);
+                    previewTurret.Initialize(selectedDescription);
                 }
 
                 previewTurret.transform.position = grid.Cells[coords.x, coords.y].WorldPosition;

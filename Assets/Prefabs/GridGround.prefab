@@ -1101,6 +1101,29 @@ MonoBehaviour:
       <TickToSpawnOn>k__BackingField: 0
     - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
       <TickToSpawnOn>k__BackingField: 5
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
+      <TickToSpawnOn>k__BackingField: 7
+  - EnemySpawns:
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
+      <TickToSpawnOn>k__BackingField: 0
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
+      <TickToSpawnOn>k__BackingField: 1
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
+      <TickToSpawnOn>k__BackingField: 2
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
+      <TickToSpawnOn>k__BackingField: 3
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: 394c1cdbbf217a046bfba7753e6cf39c, type: 2}
+      <TickToSpawnOn>k__BackingField: 4
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: f845342f339e5c1499055dc89770efd0, type: 2}
+      <TickToSpawnOn>k__BackingField: 5
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: f845342f339e5c1499055dc89770efd0, type: 2}
+      <TickToSpawnOn>k__BackingField: 6
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: f845342f339e5c1499055dc89770efd0, type: 2}
+      <TickToSpawnOn>k__BackingField: 7
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: f845342f339e5c1499055dc89770efd0, type: 2}
+      <TickToSpawnOn>k__BackingField: 8
+    - <EnemyToSpawn>k__BackingField: {fileID: 11400000, guid: f845342f339e5c1499055dc89770efd0, type: 2}
+      <TickToSpawnOn>k__BackingField: 9
 --- !u!1 &4938105139790399984
 GameObject:
   m_ObjectHideFlags: 0

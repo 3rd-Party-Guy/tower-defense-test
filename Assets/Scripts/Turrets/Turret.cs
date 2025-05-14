@@ -7,7 +7,6 @@ namespace TDTest.Combat
     public class Turret : MonoBehaviour
     {
         [SerializeField] SphereCollider sphereCollider;
-        [SerializeField] TurretDescription debugTurretDescription;
 
         TurretDescription description;
         TurretSkeleton skeleton;
@@ -64,12 +63,6 @@ namespace TDTest.Combat
             HandleEnemyRegistrationChange();
         }
 
-        void Start()
-        {
-            // Debug
-            Initialize(debugTurretDescription);
-        }
-
         void HandleEnemyRegistrationChange()
         {
             if (registeredEnemies.Count == 0)
@@ -98,7 +91,13 @@ namespace TDTest.Combat
 
         void Shoot()
         {
-            Debug.Assert(target != null, "Tried to shoot at nothing");
+            if (target == null)
+            {
+                registeredEnemies.Remove(target);
+                HandleEnemyRegistrationChange();
+                return;
+            }
+
             Debug.Assert(registeredEnemies.Contains(target), "Tried to shoot at unregistered enemy");
 
             head.LookAt(target.transform);

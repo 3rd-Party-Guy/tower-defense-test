@@ -21,7 +21,7 @@ namespace TDTest.UI
 
         void Cancel()
         {
-            Statics.Build.CancelBuild();
+            Statics.Build.ExitBuild();
         }
 
         void Build()
