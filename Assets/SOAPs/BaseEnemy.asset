@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BaseEnemy
   m_EditorClassIdentifier: 
   <Skeleton>k__BackingField: {fileID: 2899869217546162277, guid: eda3440863f251247bdd5affbe549546, type: 3}
-  <StartHealth>k__BackingField: 2
+  <StartHealth>k__BackingField: 5
   <Damage>k__BackingField: 1
+  <GoldReward>k__BackingField: 5

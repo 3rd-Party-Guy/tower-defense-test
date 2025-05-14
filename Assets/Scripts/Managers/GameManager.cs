@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using TDTest.Building;
 using TDTest.Combat;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
@@ -7,14 +9,25 @@ namespace TDTest
     [DefaultExecutionOrder(-10)]
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] int startGold;
+
+        [Space(5)]
+
         [SerializeField] Enemy levelEnemyPrefab;
+        [SerializeField] Turret levelTurretPrefab;
+        [SerializeField] PreviewTurret levelPreviewTurretPrefab;
+        [SerializeField] List<TurretDescription> levelAvailableTurrets;
 
         void Start()
         {
             Statics.Initialize();
             Statics.Combat.SetEnemyPrefab(levelEnemyPrefab);
 
-            Statics.Inputs.OnTouchBegan += CheckStructureTap;
+            Statics.Build.SetAvailableTurrets(levelAvailableTurrets);
+            Statics.Build.SetTurretPrefab(levelTurretPrefab);
+            Statics.Build.SetPreviewTurretPrefab(levelPreviewTurretPrefab);
+
+            Statics.Gold.AddGold(startGold);
         }
 
         void Update()
@@ -24,26 +37,7 @@ namespace TDTest
 
         void OnDestroy()
         {
-            Statics.Inputs.OnTouchBegan -= CheckStructureTap;
             Statics.Deinitialize();
-        }
-
-        void CheckStructureTap(TouchState state)
-        {
-            if (state.phase != UnityEngine.InputSystem.TouchPhase.Began)
-                return;
-
-            var ray = Camera.main.ScreenPointToRay(state.position);
-            Debug.DrawRay(ray.origin, ray.direction, Color.red, 10f, false);
-            
-            if (Physics.Raycast(ray.origin, ray.direction, out var hit, Mathf.Infinity, LayerMask.GetMask("Structure")))
-            {
-                var structure = Statics.Grids.TransformStructureLookup[hit.transform];
-                var grid = structure.Grid;
-                var coords = grid.WorldToGrid(hit.point);
-
-                grid.Cells[coords.x, coords.y].FSM.StateMachine.Signal(Structural.CellFSM.Trigger.ToBuilding);
-            }
         }
     }
 }

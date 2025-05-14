@@ -78,11 +78,15 @@ namespace TDTest.Combat
         {
             enemyTickSubsystem.CreateSpawnEventsForWave(registeredStructures, waveIndex);
             tickTimer.Start(1f);
+            
+            Statics.Build.FSM.StateMachine.Signal(BuildFSM.Trigger.StartFight);
         }
 
         void StopWave()
         {
             tickTimer.Pause();
+            
+            Statics.Build.FSM.StateMachine.Signal(BuildFSM.Trigger.EndFight);
         }
 
         void OnTickTimerCompleted()

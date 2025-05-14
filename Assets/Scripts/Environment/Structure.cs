@@ -18,17 +18,5 @@ namespace TDTest.Structural
             Grid = Statics.Grids.RegisterStructure(this);
             Statics.Combat.RegisterStructure(this);
         }
-
-        void OnDrawGizmosSelected()
-        {
-            if (!Application.isPlaying) return;
-            Grid.ForEachCell(DebugDrawSphere);
-        }
-
-        void DebugDrawSphere(int x, int y, Cell cell)
-        {
-            Gizmos.color = (cell.FSM.StateMachine.State is CellFSM.State.Free) ? Color.green : Color.red;
-            Gizmos.DrawSphere(cell.WorldPosition, .25f);
-        }
     }
 }

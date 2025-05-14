@@ -192,6 +192,7 @@ MonoBehaviour:
   <Body>k__BackingField: {fileID: 8440214498654935150}
   <Head>k__BackingField: {fileID: 4734266202339982402}
   <ShootRenderer>k__BackingField: {fileID: 6468004488101764000}
+  <MeshRenderer>k__BackingField: {fileID: 2394455842519175686}
 --- !u!1 &4359676112430917818
 GameObject:
   m_ObjectHideFlags: 0

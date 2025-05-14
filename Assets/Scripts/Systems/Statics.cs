@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TDTest.Building;
 using TDTest.Combat;
 using TDTest.GameFlow;
 using TDTest.Gold;
@@ -19,6 +20,7 @@ namespace TDTest
         public static GridSystem Grids { get; private set; } = new();
         public static CombatSystem Combat { get; private set; } = new();
         public static GoldSystem Gold { get; private set; } = new();
+        public static BuildSystem Build { get; private set; } = new();
 
         static List<ISystem> systems;
 
@@ -32,6 +34,7 @@ namespace TDTest
                 Grids,
                 Combat,
                 Gold,
+                Build,
             };
 
             systems.ForEach(e => e.Initialize());

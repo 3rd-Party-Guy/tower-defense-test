@@ -9,7 +9,7 @@ namespace TDTest.UI
             Statics.OnInitializationFinish += Initialize;
         }
 
-        private void OnDestroy()
+        void OnDestroy()
         {
             Statics.OnInitializationFinish -= Initialize;
         }
