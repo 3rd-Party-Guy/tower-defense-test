@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "com.3rd-party-guy.unihelper": "https://github.com/3rd-Party-Guy/UniHelper.git",
+    "com.3rd-party-guy.unistate": "https://github.com/3rd-Party-Guy/UniState.git",
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.unity.collab-proxy": "2.8.1",
     "com.unity.feature.mobile": "1.0.0",
     "com.unity.ide.rider": "3.0.31",

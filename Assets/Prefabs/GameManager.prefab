@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6141755462256121509}
+  - component: {fileID: 5402908945365935279}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -31,3 +32,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5402908945365935279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842098653663396059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00d7b66f256573848bc319c57c997e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startGold: 20
+  levelEnemyPrefab: {fileID: 4855847440574222325, guid: c7d98133c9bc8ac4daddc6e78f6b0565, type: 3}
+  levelTurretPrefab: {fileID: 3726019586731383897, guid: 93a8acce3c4a38b41856eb940a40733e, type: 3}
+  levelPreviewTurretPrefab: {fileID: 8448742659218804528, guid: 8b6eb5d28dac22c4a98fb7b63abf5733, type: 3}
+  levelAvailableTurrets:
+  - {fileID: 11400000, guid: 2a70ff0723f281645ad3547ec2b8a4c2, type: 2}
+  - {fileID: 11400000, guid: 03af2a69bc8ff4443bbf816bc18f1f4c, type: 2}
