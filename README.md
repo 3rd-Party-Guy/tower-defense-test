@@ -12,5 +12,6 @@ I tried breaking the test down just as well as I would break down a real, long-t
 Stuff I couldn't finish:
 - Game Over Screen
 - Lufteinheiten
+- Moving/Deleting already placed towers
 - Unfortunately I couldn't connect my phone for testing the game on Android (I try to use old phones to control my screen addiction)
   But I built everything with Android in mind
